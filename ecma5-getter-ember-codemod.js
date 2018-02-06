@@ -68,6 +68,74 @@ module.exports = function(file, api) {
       });
   }
 
+  function transformStandaloneGet() {
+    let hasGetImport = !!j(file.source).find(j.ImportDeclaration, {
+      specifiers: [
+        {
+          local: {
+            name: 'get'
+          }
+        }
+      ],
+      source: {
+        value: '@ember/object'
+      }
+    }).length;
+
+    if (!hasGetImport) { return; }
+
+    return root
+      .find(j.CallExpression, {
+          callee: {
+            name: 'get'
+          },
+          arguments: [
+            j.thisExpression
+          ]
+        }
+      )
+      .forEach(function(path) {
+        let replacement =  j.memberExpression(j.thisExpression(), j.identifier(path.node.arguments[1].value))
+
+        let isNotThisExpression = path.node.arguments[0].type !== 'ThisExpression';
+        let isNotDeeplyNested = path.node.arguments[1].value.indexOf('.') !== -1;
+
+        if(isNotThisExpression || isNotDeeplyNested) {
+          return;
+        }
+
+        path.replace(replacement);
+      });
+  }
+
+  function transformEmberDotGet() {
+    return root
+      .find(j.CallExpression, {
+        callee: {
+          object: {
+            name: 'Ember'
+          },
+          property: {
+            name: 'get'
+          }
+        },
+        arguments: [
+          j.thisExpression
+        ]
+      })
+      .forEach(function(path) {
+        let replacement =  j.memberExpression(j.thisExpression(), j.identifier(path.node.arguments[1].value))
+
+        let isNotThisExpression = path.node.arguments[0].type !== 'ThisExpression';
+        let isNotDeeplyNested = path.node.arguments[1].value.indexOf('.') !== -1;
+
+        if(isNotThisExpression || isNotDeeplyNested) {
+          return;
+        }
+
+        path.replace(replacement);
+      });
+  }
 
   transformThisExpression();
 
@@ -76,6 +144,10 @@ module.exports = function(file, api) {
   })
 
   transformGetPropertiesOnObject();
+
+  transformStandaloneGet();
+
+  transformEmberDotGet();
 
   return root.toSource();
 }
