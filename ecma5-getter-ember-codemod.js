@@ -19,10 +19,48 @@ module.exports = function(file, api) {
             j.identifier(path.node.arguments[0].value)
           )
         )
-      })
-      .toSource();
+      });
   }
 
-  transformThisExpression()
+  function transformGetOnObject() {
+    return root
+      .find(j.CallExpression, {
+        callee: {
+          property: {
+            name: 'get'
+          }
+        }
+      })
+      .forEach(path => {
+        path.replace(
+          j.memberExpression(
+            path.node.callee.object,
+            j.identifier(path.node.arguments[0].value)
+          )
+        )
+      });
+  }
+
+  function transformGetPropertiesOnObject() {
+    return root
+      .find(j.CallExpression, {
+        callee: {
+          property: {
+            name: 'getProperties'
+          }
+        }
+      })
+      .forEach(path => {
+        path.replace(
+          path.node.callee.object
+        )
+      });
+  }
+
+
+  transformThisExpression();
+  transformGetOnObject();
+  transformGetPropertiesOnObject();
+
   return root.toSource();
 }
