@@ -3,7 +3,6 @@ module.exports = function(file, api) {
   const root = j(file.source);
 
   function transformThisExpression() {
-    const j = api.jscodeshift;
     return root
       .find(j.CallExpression, { callee: {
         object: {
