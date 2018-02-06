@@ -2,6 +2,14 @@ module.exports = function(file, api) {
   const j = api.jscodeshift;
   const root = j(file.source);
 
+  function performReplacement(path, replacement) {
+    if(path.node.arguments[0].value.indexOf('.') !== -1) {
+      return;
+    }
+
+    path.replace(replacement);
+  }
+
   function transformThisExpression() {
     return root
       .find(j.CallExpression, { callee: {
@@ -13,12 +21,12 @@ module.exports = function(file, api) {
         }
       }})
       .forEach(path => {
-        path.replace(
-          j.memberExpression(
-            j.thisExpression(),
-            j.identifier(path.node.arguments[0].value)
-          )
+        let replacement = j.memberExpression(
+          j.thisExpression(),
+          j.identifier(path.node.arguments[0].value)
         )
+
+        performReplacement(path, replacement);
       });
   }
 
@@ -35,12 +43,12 @@ module.exports = function(file, api) {
         }
       })
       .forEach(path => {
-        path.replace(
-          j.memberExpression(
-            path.node.callee.object,
-            j.identifier(path.node.arguments[0].value)
-          )
+        let replacement = j.memberExpression(
+          path.node.callee.object,
+          j.identifier(path.node.arguments[0].value)
         )
+
+        performReplacement(path, replacement);
       });
   }
 
