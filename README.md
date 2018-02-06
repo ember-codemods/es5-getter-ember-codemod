@@ -1,6 +1,6 @@
 # ecma5-getter-ember-codemod
 
-This codemod is intended to automatically convert your usage of `get`, and `getProperties` to use traditional object dot notation as proposed by emberjs/rfcs#281.
+This codemod is intended to automatically convert your usage of `get`, and `getProperties` to use traditional object dot notation as proposed by [emberjs/rfcs#281](https://github.com/emberjs/rfcs/blob/master/text/0281-es5-getters.md).
 
 ## Installation
 
