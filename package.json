@@ -1,0 +1,17 @@
+{
+  "name": "ecma5-getter-ember-codemod",
+  "version": "0.0.0",
+  "description": "",
+  "main": "ecma5-getter-ember-codemod.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Jonathan Jackson",
+  "license": "ISC",
+  "dependencies": {
+    "jscodeshift": "^0.4.0"
+  },
+  "devDependencies": {
+    "jest": "^22.1.4"
+  }
+}
