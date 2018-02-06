@@ -22,10 +22,13 @@ module.exports = function(file, api) {
       });
   }
 
-  function transformGetOnObject() {
+  function transformGetOnObject(typicalEmberAssignment='model') {
     return root
       .find(j.CallExpression, {
         callee: {
+          object: {
+            name: typicalEmberAssignment
+          },
           property: {
             name: 'get'
           }
@@ -59,7 +62,11 @@ module.exports = function(file, api) {
 
 
   transformThisExpression();
-  transformGetOnObject();
+
+  ['model', 'route', 'controller'].forEach(function(typicalEmberAssignment) {
+    transformGetOnObject(typicalEmberAssignment);
+  })
+
   transformGetPropertiesOnObject();
 
   return root.toSource();
