@@ -4,7 +4,7 @@ chancancode.get('fullName');
 
 let model = Person.create({ firstName: 'Godfrey', lastName: 'Chan' });
 
-model.fullName;
+model.get('fullName');
 
 let route = Person.create({ firstName: 'Godfrey', lastName: 'Chan' });
 

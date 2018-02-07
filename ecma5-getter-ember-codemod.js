@@ -147,7 +147,7 @@ module.exports = function(file, api) {
 
   transformThisExpression();
 
-  ['model', 'route', 'controller'].forEach(function(typicalEmberAssignment) {
+  ['route', 'controller'].forEach(function(typicalEmberAssignment) {
     transformGetOnObject(typicalEmberAssignment);
   })
 
