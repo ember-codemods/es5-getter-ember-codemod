@@ -61,6 +61,9 @@ module.exports = function(file, api) {
           }
         }
       })
+      .filter(path => {
+        return path.parentPath.value.type === 'VariableDeclarator';
+      })
       .forEach(path => {
         path.replace(
           path.node.callee.object
