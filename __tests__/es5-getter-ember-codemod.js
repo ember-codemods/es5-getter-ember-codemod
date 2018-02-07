@@ -4,11 +4,11 @@ const fs = require('fs');
 const path = require('path');
 
 const runInlineTest = require('jscodeshift/dist/testUtils').runInlineTest;
-const Transform = require('../ecma5-getter-ember-codemod');
+const Transform = require('../es5-getter-ember-codemod');
 
-const fixtureFolder = `${__dirname}/../__testfixtures__/ecma5-getter-ember-codemod`;
+const fixtureFolder = `${__dirname}/../__testfixtures__/es5-getter-ember-codemod`;
 
-describe('ecma5-getter-ember-codemod', function() {
+describe('es5-getter-ember-codemod', function() {
   fs
     .readdirSync(fixtureFolder)
     .filter(filename => /\.input\.js$/.test(filename))

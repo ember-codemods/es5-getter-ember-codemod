@@ -1,8 +1,8 @@
 {
-  "name": "ecma5-getter-ember-codemod",
+  "name": "es5-getter-ember-codemod",
   "version": "0.0.0",
   "description": "",
-  "main": "ecma5-getter-ember-codemod.js",
+  "main": "es5-getter-ember-codemod.js",
   "scripts": {
     "test": "jest"
   },
