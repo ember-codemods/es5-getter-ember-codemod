@@ -62,7 +62,12 @@ module.exports = function(file, api) {
         }
       })
       .filter(path => {
-        return path.parentPath.value.type === 'VariableDeclarator';
+        let argumentContainsDot = path.node.arguments.some(function(i) {
+          return i.value.indexOf('.') !== -1
+        });
+        let isPartOfVariableDeclaration = path.parentPath.value.type === 'VariableDeclarator'
+
+        return isPartOfVariableDeclaration && !argumentContainsDot;
       })
       .forEach(path => {
         path.replace(
