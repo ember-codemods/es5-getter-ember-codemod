@@ -66,12 +66,13 @@ module.exports = function(file, api) {
         }
       })
       .filter(path => {
-        let argumentContainsDot = path.node.arguments.some(function(i) {
-          return i.value.indexOf('.') !== -1
-        });
-        let isPartOfVariableDeclaration = path.parentPath.value.type === 'VariableDeclarator'
+        // check that this is part of a destructuring operation
+        if (path.parentPath.node.type !== 'VariableDeclarator' || path.parentPath.node.id.type !== 'ObjectPattern') {
+          return false;
+        }
 
-        return isPartOfVariableDeclaration && !argumentContainsDot;
+        // check that there are no "deep" paths (e.g. "foo.bar")
+        return path.node.arguments.every(arg => arg.value.indexOf('.') === -1);
       })
       .forEach(path => {
         path.replace(
