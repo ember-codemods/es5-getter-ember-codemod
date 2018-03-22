@@ -12,12 +12,14 @@ module.exports = function(file, api) {
     return key.indexOf('.') !== -1;
   }
 
-  function performReplacement(path, object) {
-    if (isNestedKey(path.node.arguments[0].value) || !isValidIdentifier(path.node.arguments[0].value)) {
+  function performReplacement(path, keyIndex, object) {
+    let keyNode = path.node.arguments[keyIndex];
+
+    if (isNestedKey(keyNode.value) || !isValidIdentifier(keyNode.value)) {
       return;
     }
 
-    let replacement = j.memberExpression(object, j.identifier(path.node.arguments[0].value));
+    let replacement = j.memberExpression(object, j.identifier(keyNode.value));
 
     path.replace(replacement);
   }
@@ -32,7 +34,7 @@ module.exports = function(file, api) {
           name: 'get'
         }
       }})
-      .forEach(path => performReplacement(path, j.thisExpression()));
+      .forEach(path => performReplacement(path, 0, j.thisExpression()));
   }
 
   function transformGetOnObject(typicalEmberAssignment) {
@@ -49,7 +51,7 @@ module.exports = function(file, api) {
           }
         }
       })
-      .forEach(path => performReplacement(path, path.node.callee.object));
+      .forEach(path => performReplacement(path, 0, path.node.callee.object));
   }
 
   function transformGetPropertiesOnObject() {
