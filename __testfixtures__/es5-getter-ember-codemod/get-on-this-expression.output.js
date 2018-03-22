@@ -6,6 +6,6 @@ const Person = Object.extend({
   }),
 
   invalidIdentifier() {
-    return this.get('foo-bar');
+    return this['foo-bar'];
   },
 });

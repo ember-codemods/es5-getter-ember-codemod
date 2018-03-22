@@ -15,11 +15,13 @@ module.exports = function(file, api) {
   function performReplacement(path, keyIndex, object) {
     let keyNode = path.node.arguments[keyIndex];
 
-    if (isNestedKey(keyNode.value) || !isValidIdentifier(keyNode.value)) {
+    if (isNestedKey(keyNode.value)) {
       return;
     }
 
-    let replacement = j.memberExpression(object, j.identifier(keyNode.value));
+    let replacement = isValidIdentifier(keyNode.value)
+      ? j.memberExpression(object, j.identifier(keyNode.value))
+      : j.memberExpression(object, keyNode, true);
 
     path.replace(replacement);
   }
