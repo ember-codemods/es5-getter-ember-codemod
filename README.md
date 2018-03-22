@@ -45,7 +45,7 @@ controller.get('fullName');
 ```js
 let chancancode = Person.create({ firstName: 'Godfrey', lastName: 'Chan' });
 
-chancancode.get('fullName');
+chancancode.fullName;
 
 let model = Person.create({ firstName: 'Godfrey', lastName: 'Chan' });
 
