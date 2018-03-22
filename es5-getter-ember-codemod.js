@@ -105,16 +105,12 @@ module.exports = function(file, api) {
         }
       )
       .forEach(function(path) {
-        let replacement =  j.memberExpression(j.thisExpression(), j.identifier(path.node.arguments[1].value))
-
         let isNotThisExpression = path.node.arguments[0].type !== 'ThisExpression';
-        let isNotDeeplyNested = isNestedKey(path.node.arguments[1].value);
-
-        if(isNotThisExpression || isNotDeeplyNested || !isValidIdentifier(path.node.arguments[1].value)) {
+        if (isNotThisExpression) {
           return;
         }
 
-        path.replace(replacement);
+        performReplacement(path, 1, j.thisExpression());
       });
   }
 
@@ -134,16 +130,12 @@ module.exports = function(file, api) {
         ]
       })
       .forEach(function(path) {
-        let replacement =  j.memberExpression(j.thisExpression(), j.identifier(path.node.arguments[1].value))
-
         let isNotThisExpression = path.node.arguments[0].type !== 'ThisExpression';
-        let isNotDeeplyNested = isNestedKey(path.node.arguments[1].value);
-
-        if(isNotThisExpression || isNotDeeplyNested || !isValidIdentifier(path.node.arguments[1].value)) {
+        if (isNotThisExpression) {
           return;
         }
 
-        path.replace(replacement);
+        performReplacement(path, 1, j.thisExpression());
       });
   }
 
