@@ -13,3 +13,5 @@ route.fullName;
 let controller = Person.create({ firstName: 'Godfrey', lastName: 'Chan' });
 
 controller.fullName;
+controller.get('foo.bar');
+controller['foo-bar'];
