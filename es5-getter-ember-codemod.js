@@ -1,3 +1,5 @@
+'use strict';
+
 module.exports = function(file, api) {
   const j = api.jscodeshift;
   const root = j(file.source);
@@ -30,7 +32,9 @@ module.exports = function(file, api) {
       });
   }
 
-  function transformGetOnObject(typicalEmberAssignment='model') {
+  function transformGetOnObject(typicalEmberAssignment) {
+    typicalEmberAssignment = typicalEmberAssignment || 'model';
+
     return root
       .find(j.CallExpression, {
         callee: {
