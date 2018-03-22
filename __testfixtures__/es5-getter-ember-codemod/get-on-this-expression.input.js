@@ -8,4 +8,12 @@ const Person = Object.extend({
   invalidIdentifier() {
     return this.get('foo-bar');
   },
+
+  numericKey() {
+    return this.get(42);
+  },
+
+  templatedKey() {
+    return this.get(`${'foo'}`);
+  },
 });

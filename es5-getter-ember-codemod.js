@@ -15,7 +15,7 @@ module.exports = function(file, api) {
   function performReplacement(path, keyIndex, object) {
     let keyNode = path.node.arguments[keyIndex];
 
-    if (isNestedKey(keyNode.value)) {
+    if (keyNode.type !== 'Literal' || typeof keyNode.value !== 'string' || isNestedKey(keyNode.value)) {
       return;
     }
 
