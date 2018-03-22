@@ -4,8 +4,12 @@ module.exports = function(file, api) {
   const j = api.jscodeshift;
   const root = j(file.source);
 
+  function isNestedKey(key) {
+    return key.indexOf('.') !== -1;
+  }
+
   function performReplacement(path, replacement) {
-    if(path.node.arguments[0].value.indexOf('.') !== -1) {
+    if(isNestedKey(path.node.arguments[0].value)) {
       return;
     }
 
@@ -110,7 +114,7 @@ module.exports = function(file, api) {
         let replacement =  j.memberExpression(j.thisExpression(), j.identifier(path.node.arguments[1].value))
 
         let isNotThisExpression = path.node.arguments[0].type !== 'ThisExpression';
-        let isNotDeeplyNested = path.node.arguments[1].value.indexOf('.') !== -1;
+        let isNotDeeplyNested = isNestedKey(path.node.arguments[1].value);
 
         if(isNotThisExpression || isNotDeeplyNested) {
           return;
@@ -139,7 +143,7 @@ module.exports = function(file, api) {
         let replacement =  j.memberExpression(j.thisExpression(), j.identifier(path.node.arguments[1].value))
 
         let isNotThisExpression = path.node.arguments[0].type !== 'ThisExpression';
-        let isNotDeeplyNested = path.node.arguments[1].value.indexOf('.') !== -1;
+        let isNotDeeplyNested = isNestedKey(path.node.arguments[1].value);
 
         if(isNotThisExpression || isNotDeeplyNested) {
           return;
