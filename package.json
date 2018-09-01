@@ -2,16 +2,23 @@
   "name": "es5-getter-ember-codemod",
   "version": "0.0.0",
   "description": "",
-  "main": "es5-getter-ember-codemod.js",
   "scripts": {
-    "test": "jest"
+    "test": "codemod-cli test",
+    "update-docs": "codemod-cli update-docs"
   },
+  "bin": "./bin/cli.js",
   "author": "Jonathan Jackson",
+  "keywords": [
+    "codemod-cli"
+  ],
   "license": "ISC",
   "dependencies": {
-    "jscodeshift": "^0.4.0"
+    "codemod-cli": "^0.2.6"
   },
   "devDependencies": {
-    "jest": "^21.0.0"
+    "jest": "^23.1.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
