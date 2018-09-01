@@ -13,7 +13,8 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "codemod-cli": "^0.2.6"
+    "codemod-cli": "^0.2.6",
+    "recast": "^0.15.3"
   },
   "devDependencies": {
     "jest": "^23.1.0"
