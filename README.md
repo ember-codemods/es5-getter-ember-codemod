@@ -14,23 +14,21 @@ test cases.
 Installation
 ------------------------------------------------------------------------------
 
-`es5-getter-ember-codemod` itself doesn't need to be installed, but you need to
-install [`jscodeshift`](https://github.com/facebook/jscodeshift) to run the
-codemod script:
+`es5-getter-ember-codemod` itself doesn't need to be installed but you can run it using:
 
 ```
-npm install -g jscodeshift
-```
+npx github:rondale-sc/es5-getter-ember-codemod ...
+``` 
 
 
 Usage
 ------------------------------------------------------------------------------
 
-You can clone/download this repository or just run the codemods from URL like
+You can clone/download this repository or just run the codemods using the command
 shown in the following example:
 
 ```
-jscodeshift -t https://rawgit.com/rondale-sc/es5-getter-ember-codemod/master/es5-getter-ember-codemod.js ./app
+npx github:rondale-sc/es5-getter-ember-codemod es5-getter-ember-codemod app/**/*.js
 ```
 
 
