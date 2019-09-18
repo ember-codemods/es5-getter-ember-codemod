@@ -60,6 +60,12 @@ module.exports = function transformer(file, api) {
           }
         }
       })
+      .filter(({ node: {arguments: args} }) => {
+        // mirage or pretender stubs pass multiple arguments to
+        // this.get, so we restrict transformation to get invocations
+        // that provide only 1 argument
+        return args.length === 1;
+      })
       .forEach((path) => performReplacement(path, 0, j.thisExpression()));
   }
 
