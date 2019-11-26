@@ -123,3 +123,8 @@ let { foo, bar, baz } = this;
 
 let { foo, barBaz } = this.getProperties('foo', 'bar.baz');
 ```
+
+Enforcement
+------------------------------------------------------------------------------
+
+The [ember/no-get](https://github.com/ember-cli/eslint-plugin-ember/blob/master/docs/rules/no-get.md) lint rule is available for enforcing this.
