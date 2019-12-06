@@ -17,7 +17,7 @@ Installation
 `es5-getter-ember-codemod` itself doesn't need to be installed but you can run it using:
 
 ```
-npx github:rondale-sc/es5-getter-ember-codemod ...
+npx github:ember-codemods/es5-getter-ember-codemod ...
 ``` 
 
 
@@ -28,7 +28,7 @@ You can clone/download this repository or just run the codemods using the comman
 shown in the following example:
 
 ```
-npx github:rondale-sc/es5-getter-ember-codemod es5-getter-ember-codemod app/**/*.js
+npx github:ember-codemods/es5-getter-ember-codemod es5-getter-ember-codemod app/**/*.js
 ```
 
 
