@@ -6,21 +6,8 @@ function isValidIdentifier(identifier) {
   );
 }
 
-function isTypeScript(file) {
-  return /\.ts$/.test(file.path);
-}
-
 module.exports = function transformer(file, api) {
-  let j;
-  let typescript = false;
-  if (isTypeScript(file)) {
-    const parser = require('recast/parsers/typescript');
-    typescript = true;
-    j = api.jscodeshift.withParser(parser);
-  } else {
-    j = api.jscodeshift;
-  }
-
+  const j = getParser(api);
   const root = j(file.source);
 
   function isNestedKey(key) {
@@ -30,10 +17,7 @@ module.exports = function transformer(file, api) {
   function performReplacement(path, keyIndex, object) {
     let keyNode = path.node.arguments[keyIndex];
 
-    if (typescript && keyNode.type !== 'StringLiteral') {
-      return;
-    }
-    if (!typescript && keyNode.type !== 'Literal') {
+    if (keyNode.type !== 'StringLiteral' && keyNode.type !== 'Literal') {
       return;
     }
 

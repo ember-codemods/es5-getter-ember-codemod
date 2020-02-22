@@ -1,19 +1,21 @@
-import Object, { computed } from '@ember/object';
+import Object from '@ember/object';
+import { computed } from '@ember-decorators/object';
 
-const Person = Object.extend({
-  fullName: computed('firstName', 'lastName', function() {
+class Person extends Object {
+  @computed('firstName', 'lastName')
+  get fullName() {
     return `${this.firstName} ${this.lastName}`;
-  }),
+  }
 
   invalidIdentifier() {
     return this['foo-bar'];
-  },
+  }
 
   numericKey() {
     return this.get(42);
-  },
+  }
 
   templatedKey() {
     return this.get(`${'foo'}`);
-  },
-});
+  }
+}
