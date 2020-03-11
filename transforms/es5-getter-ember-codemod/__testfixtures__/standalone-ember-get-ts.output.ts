@@ -1,19 +1,15 @@
 import Ember from 'ember';
-import { get } from '@ember/object';
+import { get } from '@ember/object'
 
-class Thing {
-  standaloneMethod() {
-    let foo = this.foo;
-    let foo = get(this, 'foo.bar');
-    let foo = this['foo-bar'];
-    let foo = get(this, 42);
+let foo1 = this.foo;
+let foo2 = get(this, 'foo.bar');
+let foo3 = this['foo-bar'];
+let foo4 = get(this, 42);
 
-    let foo = this.foo;
-    let foo = Ember.get(this, 'foo.bar');
-    let foo = this['foo-bar'];
-    let foo = Ember.get(this, `${'foo'}.bar`);
+let foo5 = this.foo;
+let foo6 = Ember.get(this, 'foo.bar');
+let foo7 = this['foo-bar'];
+let foo8 = Ember.get(this, `${'foo'}.bar`);
 
-    let obj = { bar: 'baz' };
-    let bar = get(obj, 'bar');
-  }
-}
+let obj = { bar: 'baz' };
+let bar = get(obj, 'bar');

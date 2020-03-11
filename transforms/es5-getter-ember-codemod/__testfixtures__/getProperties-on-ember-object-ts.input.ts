@@ -1,12 +1,18 @@
 class Thing {
-  getPropertiesMethod() {
-    let { firstName, lastName, fullName } = this.getProperties(
+  getPropertiesMethod(chancancode) {
+    let { firstName, lastName, fullName } = chancancode.getProperties(
       'firstName',
       'lastName',
       'fullName'
     );
 
-    let { firstName, lastName, fullName } = chancancode.getProperties(
+    Object.assign({}, this.getProperties('firstName', 'lastName', 'fullName'), {
+      firstName: 'bob'
+    });
+  }
+
+  thisGetPropertiesMethod() {
+    let { firstName, lastName, fullName } = this.getProperties(
       'firstName',
       'lastName',
       'fullName'
