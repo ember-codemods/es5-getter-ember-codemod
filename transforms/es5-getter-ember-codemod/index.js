@@ -89,9 +89,15 @@ module.exports = function transformer(file, api) {
         }
 
         // check that there are no "deep" paths (e.g. "foo.bar")
-        return path.node.arguments.every(
-          (arg) => arg.value.indexOf('.') === -1
-        );
+        if (path.node.arguments.length === 1 && path.node.arguments[0].type === 'ArrayExpression') {
+          return path.node.arguments[0].elements.every(
+            (arg) => arg.value.indexOf('.') === -1
+          );
+        } else {
+          return path.node.arguments.every(
+            (arg) => arg.value.indexOf('.') === -1
+          );
+        }
       })
       .forEach((path) => {
         path.replace(path.node.callee.object);
