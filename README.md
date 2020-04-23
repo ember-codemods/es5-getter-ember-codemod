@@ -1,7 +1,7 @@
 es5-getter-ember-codemod
 ==============================================================================
 
-[![Build Status](https://travis-ci.org/rondale-sc/es5-getter-ember-codemod.svg?branch=master)](https://travis-ci.org/rondale-sc/es5-getter-ember-codemod)
+[![Build Status](https://travis-ci.org/ember-codemods/es5-getter-ember-codemod.svg?branch=master)](https://travis-ci.org/ember-codemods/es5-getter-ember-codemod)
 
 This codemod is intended to automatically convert your usage of `get`, and
 `getProperties` to use traditional object dot notation as proposed by
