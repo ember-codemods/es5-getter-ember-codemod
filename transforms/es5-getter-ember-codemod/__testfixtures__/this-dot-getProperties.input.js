@@ -18,4 +18,24 @@ class Thing {
   thisDotGetPropertiesMethod3() {
     let foo = this.getProperties('bar', 'baz');
   }
+
+  thisDotGetPropertiesMethodWithArray() {
+    let { foo, bar, baz } = this.getProperties(['foo', 'bar', 'baz']);
+  }
+
+  nestedGetPropertiesMethodWithArray() {
+    let { foo, bar, baz } = this.nested.object.getProperties([
+      'foo',
+      'bar',
+      'baz'
+    ]);
+  }
+
+  thisDotGetPropertiesMethodWithArray2() {
+    let { foo, barBaz } = this.getProperties(['foo', 'bar.baz']);
+  }
+
+  thisDotGetPropertiesMethodWithArray3() {
+    let foo = this.getProperties(['bar', 'baz']);
+  }
 }
