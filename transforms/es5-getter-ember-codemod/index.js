@@ -100,15 +100,12 @@ module.exports = function transformer(file, api) {
 
   function transformStandaloneGet() {
     let hasGetImport = !!j(file.source).find(j.ImportDeclaration, {
-      specifiers: [
-        {
-          local: {
-            name: 'get'
-          }
-        }
-      ],
       source: {
         value: '@ember/object'
+      }
+    }).find(j.ImportSpecifier, {
+      local: {
+        name: 'get'
       }
     }).length;
 

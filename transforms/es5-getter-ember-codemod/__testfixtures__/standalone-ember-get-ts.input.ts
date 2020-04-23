@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { get } from '@ember/object'
+import { set, get } from '@ember/object'
 
 let foo1 = get(this, 'foo');
 let foo2 = get(this, 'foo.bar');

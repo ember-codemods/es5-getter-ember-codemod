@@ -439,7 +439,7 @@ class Thing {
 **Input** (<small>[standalone-ember-get-ts.input.ts](transforms/es5-getter-ember-codemod/__testfixtures__/standalone-ember-get-ts.input.ts)</small>):
 ```ts
 import Ember from 'ember';
-import { get } from '@ember/object'
+import { set, get } from '@ember/object'
 
 let foo1 = get(this, 'foo');
 let foo2 = get(this, 'foo.bar');
@@ -459,7 +459,7 @@ let bar = get(obj, 'bar');
 **Output** (<small>[standalone-ember-get-ts.output.ts](transforms/es5-getter-ember-codemod/__testfixtures__/standalone-ember-get-ts.output.ts)</small>):
 ```ts
 import Ember from 'ember';
-import { get } from '@ember/object'
+import { set, get } from '@ember/object'
 
 let foo1 = this.foo;
 let foo2 = get(this, 'foo.bar');
@@ -481,7 +481,7 @@ let bar = get(obj, 'bar');
 **Input** (<small>[standalone-ember-get.input.js](transforms/es5-getter-ember-codemod/__testfixtures__/standalone-ember-get.input.js)</small>):
 ```js
 import Ember from 'ember';
-import { get } from '@ember/object'
+import { set, get } from '@ember/object'
 
 let foo1 = get(this, 'foo');
 let foo2 = get(this, 'foo.bar');
@@ -501,7 +501,7 @@ let bar = get(obj, 'bar');
 **Output** (<small>[standalone-ember-get.output.js](transforms/es5-getter-ember-codemod/__testfixtures__/standalone-ember-get.output.js)</small>):
 ```js
 import Ember from 'ember';
-import { get } from '@ember/object'
+import { set, get } from '@ember/object'
 
 let foo1 = this.foo;
 let foo2 = get(this, 'foo.bar');
